@@ -2,13 +2,18 @@
 <html>
 <head>
 	<title> Попытка не пытка(головоломка) </title>
+	<style> 
+	.none {
+		opacity: 0.5;
+	}
+	</style>
 </head>
 <body>
 	<label><h1>score<h1></label>
 	<output id="winScore"></output>
 	<br>
 <script>
-	const li = ["green.jpg", "purple.jpg", "yellow.jpg", "vinous.jpg"];
+	const li = ["green.jpg", "purple.jpg", "yellow.jpg", "vinous.jpg", "лев.jpg", "рак.jpg", "весы.jpg", "овен.jpg"];
 	
 	let clickCounter = 0;
 	let change;
@@ -64,6 +69,7 @@
 					img3.className = "none";
 					winScore = winScore + 1;
 					outputScore(winScore);
+					
 				}
 			}
 		}
@@ -81,9 +87,11 @@
 					img3.className = "none";
 					winScore = winScore + 1;
 					outputScore(winScore);
+					
 				}
 			}
 		}
+		
 	}
 	
 	function addition() {
@@ -101,6 +109,11 @@
 		}
 		
 	}
+	
+	function pause(){
+		for(let i=0; i<1000000000; i++){
+		}
+	}
 
 	function fallDown() {
 		let allEmptyImgsUp = false;
@@ -114,7 +127,7 @@
 					let img1 = document.querySelector(`img[data-x="${x}"][data-y="${y}"]`);
 					let img2 = document.querySelector(`img[data-x="${x+1}"][data-y="${y}"]`);
 					//console.log(img2.src,srcNone);
-					if(img2.className==="none"){
+					if((img2.className==="none")&&(img1.className!=="none")){
 						changeImgs(img1,img2);
 						ctr++;
 					}
@@ -131,8 +144,9 @@
 		const changeSrc = img2.src;
 		img2.src = img1.src;
 		img1.src = changeSrc;
-		fieldCheckHorizontal();
-		fieldCheckVertical();
+		const changeClassName = img2.className;
+		img2.className = img1.className;
+		img1.className = changeClassName;
 	}
 
 	function win() {
